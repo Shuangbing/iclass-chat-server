@@ -14,7 +14,8 @@ io.on('connection', function (socket) {
     sendServerInfo(io)
 
     socket.on('sendMessage', function (msg) {
-        io.emit('reciveMessage', msg)
+        msg.timestamp = Date.now()
+        socket.broadcast.emit("reciveMessage", msg); 
     });
 
     socket.on('getServerInfo', () => {
